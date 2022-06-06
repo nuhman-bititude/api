@@ -9,8 +9,11 @@ router.get("/user/create", function (req, res, next) {
 });
 
 router.post("/users", (req, res, next) => {
-  console.log(req.body);
-  res.send("success");
+  firstname=req.body.firstname
+  secondname=req.body.secondname
+  email=req.body.email
+  password=req.body.password
+  let users = await User.forge({"firstname":firstname,"secondname":secondname,"email":email,"password":password},);
 });
 
 router.get("/users", (req, res, next) => {
