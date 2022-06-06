@@ -1,14 +1,16 @@
-const knex = "require"({
+const knex = require('knex')({
   client: "mysql",
   connection: {
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
     password: "password",
     database: "mydb",
-    charset: "utf8",
+    charset  : 'utf8',
   },
 });
 
 const bookshelf = require("bookshelf")(knex);
 
+
 module.exports=bookshelf
+
