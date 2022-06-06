@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bookshelf": "^1.2.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "knex": "^0.21.21",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuhman-bititude/rest-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nuhman-bititude/rest-api/issues"
+  },
+  "homepage": "https://github.com/nuhman-bititude/rest-api#readme",
+  "description": ""
+}
