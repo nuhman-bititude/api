@@ -67,34 +67,43 @@ router.get("/users/edit/:id", async (req, res, next) => {
   }
 });
 
-router.get(
+router.patch(
   // USER UPDATE WITH SPECIFC ID
-  "/users/edit/:id/:firstname/:secondname/:email/:password",
+  "/users/edit/:id",
   (req, res, next) => {
     id = Number(req.params.id);
-    firstname = req.params.firstname;
-    secondname = req.params.secondname;
-    email = req.params.email;
-    password = req.params.password;
-    User.where({ id: id }).save(
-      {
-        firstname: firstname,
-        secondname: secondname,
-        email: email,
-        password: password,
-      },
-      { patch: true }
-    );
-    res.send("Updated User");
+    firstname = req.body.firstname;
+    secondname = req.body.secondname;
+    email = req.body.email;
+    password = req.body.password;
+    console.log(password);
+    try {
+      User.where({ id: id }).save(
+        {
+          firstname: firstname,
+          secondname: secondname,
+          email: email,
+          password: password,
+        },
+        { patch: true }
+      );
+      res.send("Updated User");
+    } catch (error) {
+      res.send(error);
+    }
   }
 );
 
 router.get("/users/delete/:id"), // USER DELETE WITH SPECIFIC ID
   async (req, res, next) => {
     id = Number(req.params.id);
-    console.log(id);
-    let user = await User.where({ id: id }).destroy();
-    res.send(user);
+    // console.log(id);
+    try {
+      let user = await User.where({ id: id }).destroy();
+      res.send("Deleted User");
+    } catch (error) {
+      res.send(error);
+    }
   };
 
 module.exports = router;

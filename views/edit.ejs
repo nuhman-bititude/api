@@ -30,9 +30,9 @@
   </head>
   <body>
     <div class="p3 mt-5">
-      <form action="/users" method="post" class="form">
-        <h4>Edit Details of id : <%= id %> </h4>
-        <br>
+      <form action="/users/edit/<%= id %> " method="post" class="form">
+        <h4>Edit Details of id : <%= id %></h4>
+        <br />
         <label for="First" class="form-label">First Name:</label>
         <input
           type="text"
