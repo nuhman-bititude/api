@@ -10,19 +10,16 @@ exports.createUserForm = (req, res, next) => {
 exports.createUser = async (req, res, next) => {
   // POST METHOD FOR INSERTION OF USER INTO DB
   const errors = validationResult(req);
-  firstname = req.body.firstName;
-  secondname = req.body.secondName;
-  email = req.body.email;
-  password = req.body.password;
+
   try {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
     var users = await User.forge({
-      firstname: firstname,
-      secondname: secondname,
-      email: email,
-      password: password,
+      firstname: req.body.firstname,
+      secondname: req.body.secondname,
+      email: req.body.email,
+      password: req.body.password,
     }).save();
   } catch (error) {
     console.error(error);
@@ -71,15 +68,11 @@ exports.viewEdit = async (req, res, next) => {
   try {
     let user = await User.where({ id: parseInt(id) }).fetch({ require: true });
     // console.log(user.attributes.firstname)
-    firstname = user.attributes.firstname;
-    secondname = user.attributes.secondname;
-    email = user.attributes.email;
-    password = user.attributes.password;
     res.render("edit", {
-      firstname: firstname,
-      secondname: secondname,
-      email: email,
-      password: password,
+      firstname: user.attributes.firstname,
+      secondname: user.attributes.secondname,
+      email: user.attributes.email,
+      password: user.attributes.password,
     });
   } catch (error) {
     if (error.message == "EmptyResponse") {
@@ -94,10 +87,6 @@ exports.editUser = (req, res, next) => {
   // USER UPDATE WITH SPECIFC ID
   const errors = validationResult(req);
   id = Number(req.params.id);
-  firstname = req.body.firstname;
-  secondname = req.body.secondname;
-  email = req.body.email;
-  password = req.body.password;
   console.log(password);
   try {
     if (!errors.isEmpty()) {
@@ -105,10 +94,10 @@ exports.editUser = (req, res, next) => {
     }
     User.where({ id: id }).save(
       {
-        firstname: firstname,
-        secondname: secondname,
-        email: email,
-        password: password,
+        firstname: req.body.firstname,
+        secondname: req.body.secondname,
+        email: req.body.email,
+        password: req.body.password,
       },
       { patch: true }
     );
